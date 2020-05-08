@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log ind</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+
+    <!-- Henter Font fra Google's Font API -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans" >
+
+    <!-- Linker vores stylesheet -->
+    <link rel="stylesheet" type="text/css" href="default.css">
+    <!-- Tilføjer ekstra stylesheet til dennne her side. Bemærk: rækkefølgen er vigtig -->
+    <link rel="stylesheet" type="text/css" href="userlist.css">
+    <link rel="stylesheet" type="text/css" href="createuser.css">
+<script>
+    $(document).ready(function() {
+        <!-- kode der køres ved sidens indlæsning -->
+        $('#loginform').show();
+        $('#userlist').hide();
+        $('#createuserform').hide();
+
+        $('#loginbutton').click(function(){
+            event.preventDefault();
+            <!-- mere spændende kode ved tryk på knappen -->
+            $('#loginform').hide();
+            $('#userlist').show();
+            $('#createuserform').hide();
+        });
+        $('#createbutton').click(function () {
+            event.preventDefault();
+            $('#loginform').hide();
+            $('#userlist').hide();
+            $('#createuserform').show();
+        })
+        $('#createsubmit').click(function () {
+            event.preventDefault();
+            $('#loginform').hide();
+            $('#userlist').show();
+            $('#createuserform').hide();
+        })
+    });
+</script>
+</head>
+<body>
+
+<div id="loginform">
+    <h1>Log ind</h1>
+
+    <form> <!-- action="userlist.html"-->
+        <input type="text" name="username" placeholder="Username"><br>
+        <input id="psw" type="password" name="passwd" placeholder="Password"><br>
+        <input type="submit" id="loginbutton" class="primarybutton" value="Log ind">
+    </form>
+
+    <!-- Logo med style defineret direkte i HTML -->
+    <img id="logo" src="dtu_logo.png" style="margin-top: 2%" width="50" height="72.5">
+</div>
+
+<div id="userlist">
+    <h1>Brugeroversigt</h1>
+
+    <!-- En knap der sender dig til en anden side i ren html-->
+    <form> <!-- action="createuser.html"-->
+        <input id="createbutton" type="submit" class="primarybutton" value="Opret Ny Bruger">
+    </form>
+
+    <!-- Statisk tabel over brugere -->
+    <!-- Vi fjerner cellpadding og spacing, og laver det i CSS i stedet -->
+    <table class="brugertable" cellpadding="0" cellspacing="0">
+        <tr>
+            <th>Bruger ID</th>
+            <th>Brugernavn</th>
+            <th>Rolle</th>
+            <th>Fornavn</th>
+            <th>Efternavn</th>
+            <th>Vej</th>
+            <th>Vejnummer</th>
+            <th>Postnummer</th>
+            <th>By</th>
+            <th></th> <!-- Ekstra tom celle, så de matcher tabelstørrelsen-->
+        </tr>
+
+        <!-- Bruger 1 -->
+        <tr>
+            <td>1</td>
+            <td>magnussk</td>
+            <td>Admin</td>
+            <td>Magnus</td>
+            <td>Koch</td>
+            <td>En vej</td>
+            <td>123</td>
+            <td>1234</td>
+            <td>Etstediverdenen</td>
+
+            <!-- Vi kan tilføje andre elementer inde i en celle -->
+            <td><a href="userlist.html">Slet</a></td>
+        </tr>
+
+        <!-- Bruger 1 -->
+        <tr>
+            <td>2</td>
+            <td>maltebp</td>
+            <td>Admin</td>
+            <td>Malte</td>
+            <td>Pedersen</td>
+            <td>En anden vej</td>
+            <td>45</td>
+            <td>4000</td>
+            <td>En Anden By</td>
+            <td><a href="userlist.html">Slet</a></td>
+        </tr>
+    </table>
+</div>
+<div id="createuserform">
+    <h1>Create user</h1>
+
+    <form> <!--action="userlist.html"-->
+        <div id="userid">User ID: <label>1234</label></div>
+        <input type="text" placeholder="User name"><br>
+        <input type="text" placeholder="First name"><br>
+        <input type="text" placeholder="Family name"><br>
+
+        <select>
+            <option disabled selected hidden>Select role model</option>
+            <option>Adminstrator</option>
+            <option>Farmaceut</option>
+            <option>Production leader</option>
+            <option>Lab technician</option>
+        </select><br>
+
+        <div class="radiogroup">
+            <label id="subject">Gender</label><br>
+            <input type="radio" name="gender">
+            <label>Female</label><br>
+            <input type="radio" name="gender">
+            <label>Male</label><br>
+            <input type="radio" name="gender">
+            <label>Other</label><br>
+            <input id="createsubmit" type="submit" class="primarybutton" value="Create">
+        </div>
+    </form>
+
+</div>
+</body>
+</html>
