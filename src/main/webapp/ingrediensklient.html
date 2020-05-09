@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script type="text/javascript" src="jquery.serialize-object.js"></script>
+    <script>
+        function updateList() {
+            $("#ingrediensliste").html('<tr><th>ID</th><th>Navn</th><th>Mængde</th></tr>');
+            for(var i = 0; i < 100; i++) {
+                var data = JSON.stringify({id: i, name: "", amount: 0.0});
+                $.ajax({				 //Indleder et asynkront ajax kald
+                    url : 'rest/ingredient/read',
+                    type : 'POST',	       //Typen af HTTP requestet (GET er default)
+                    data: data,
+                    contentType: 'application/json',
+                    success : function(back){//Funktion der skal udføres når data er hentet
+                        console.log(back);
+                        if(back != undefined) {
+                            // var result = JSON.parse(back);
+                            $('#ingrediensliste').append("<tr><td>" + back.id + "</td><td>" + back.name + "</td><td>" + back.amount + "</td>");
+                        }
+                    }
+                });
+            }
+        }
+        function create() {
+            var data =  $('#ingredientform').serializeJSON();
+            console.log(data);
+            $.ajax({				 //Indleder et asynkront ajax kald
+                url : 'rest/ingredient/create',
+                type : 'POST',	       //Typen af HTTP requestet (GET er default)
+                data: data,
+                contentType: 'application/json',
+                success : function(data){//Funktion der skal udføres når data er hentet
+                    console.log(data);
+                    $('#mydiv').html("Ingredient added : " + data); //Manipulerer #mydiv.
+                }
+            });
+            updateList();
+            return false; //for at undgå at knappen poster data (default behavior).
+        }
+        function obliterate() {
+            var data = JSON.stringify({id: $("#remId").val(), name: "", amount: 0.0});
+            console.log(data);
+            $.ajax({				 //Indleder et asynkront ajax kald
+                url : 'rest/ingredient/delete',
+                type : 'POST',	       //Typen af HTTP requestet (GET er default)
+                data: data,
+                contentType: 'application/json',
+                success : function(data){//Funktion der skal udføres når data er hentet
+                    console.log(data);
+                    $('#mydiv').html("Ingredient obliterated : " + data); //Manipulerer #mydiv.
+                }
+            });
+            updateList();
+            return false; //for at undgå at knappen poster data (default behavior).
+        }
+        $(document).ready(function() {
+            updateList();
+        });
+    </script>
+</head>
+<body>
+
+<h1>Opret ingrediens</h1>
+<form id="ingredientform">
+    ID: <input type="text" name="id" id="id">
+    Navn: <input type="text" name="name" id="name">
+    Mængde: <input type="text" name="amount" id="amount">
+    <input type="button" onclick="create();" value="Create ingredient">
+</form>
+<div id="mydiv"></div>
+
+<h1>Ingrediensliste</h1>
+<table id="ingrediensliste">
+</table>
+
+ID: <input type="text" id="remId">
+<input type="button" onclick="obliterate();" value="Delete ingredient">
+
+</body>
+</html>
