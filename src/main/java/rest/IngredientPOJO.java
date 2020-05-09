@@ -4,22 +4,22 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class IngredientPOJO {
-    private String id;
+    private Integer id;
     private String name;
-    private String amount;
+    private Double amount;
 
     public IngredientPOJO() {}
-    public IngredientPOJO(String id, String name, String amount) {
+    public IngredientPOJO(Integer id, String name, Double amount) {
         this.id = id;
         this.name = name;
         this.amount = amount;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -31,11 +31,11 @@ public class IngredientPOJO {
         this.name = name;
     }
 
-    public String getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
     //getters og setters...

@@ -24,7 +24,7 @@ public class IngredientResource {
     }
 
     @POST
-    @Path("json")
+    @Path("/json")
     @Consumes(MediaType.APPLICATION_JSON)
     public Boolean jsonCreateIngredient(IngredientPOJO ingredient) {
         if(ingredient == null) {
