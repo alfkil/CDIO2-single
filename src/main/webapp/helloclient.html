@@ -1,22 +1,20 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Hello Test</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script>
         $(document).ready(function() {
             // før click handlers håndteres
             $('#hellobutton').click(function() { //Sætter en click handler på knappen
                 $.ajax({				 //Indleder et asynkront ajax kald
-                    // url : 'rest/ingredient/form',
-                    // url : 'rest/ingredient/query?' + jQuery.param({ id: $("#id").val(), name : $("#name").val(), amount: $("#amount").val()}),	 //specificerer endpointet
-                    url : 'rest/ingredient/path/' + $("#id").val() + '/' + $("#name").val() + '/' + $("#amount").val(),
+                    url : 'rest/hello/greeting',	 //specificerer endpointet
                     type : 'POST',	       //Typen af HTTP requestet (GET er default)
-                    // data: jQuery.param({ id: $("#id").val(), name : $("#name").val(), amount: $("#amount").val()}) ,
-                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    data: $('#name').val(),
+                    contentType : 'text/plain',
                     success : function(data){//Funktion der skal udføres når data er hentet
-                        console.log(data);
                         $('#mydiv').html(data); //Manipulerer #mydiv.
                     }
                 });
@@ -26,12 +24,8 @@
     </script>
 </head>
 <body>
-
-<input type="text" id="id">
-<input type="text" id="name">
-<input type="text" id="amount">
-<input type="button" id="hellobutton" value="send">
-
-<div id="mydiv"></div>
+<input type="text" id="name">Type your name
+<button id="hellobutton">Hello</button>
+<div id="mydiv">Tryk på knappen for at skifte teksten</div>
 </body>
 </html>

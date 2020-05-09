@@ -1,5 +1,5 @@
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
-@ApplicationPath("/ide")
+@ApplicationPath("/rest")
 public class Rest extends Application { }
